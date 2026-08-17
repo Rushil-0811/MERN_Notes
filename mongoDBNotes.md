@@ -20,3 +20,16 @@ db.createcollection("students") - creates collection for school
 on db school to make it appear in show dbs
 
 use school - creates new db with name school
+
+to insert data into the school db, we insert to the students collection
+
+school> db.students.insertOne({name:'abc', age:30})
+
+the below command will return everything inside of the studnet collection
+school> db.students.find()
+
+insert multiple documents into the student collection
+its basically a collection of objects inside of an array
+schoool> db.students.insertMany([{}, {}, {}])
+this method is just how to insert documents using the shell method
+you can do the same usinc gthe compass
