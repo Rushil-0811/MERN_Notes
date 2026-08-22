@@ -63,3 +63,51 @@ it has a projection parameter as well
 .find({}, {_id:false, name:true, gpa:true})
 basically .find format is 
 .find({query}, {projection})
+
+update documents in mongodb
+db, name of collection
+can updateone or updatemany
+
+db.students.updateOne(filter, update)
+set replaces value of a field, the update is to replace the selected filter
+the set is used to define what parameter of the document is to be updated of the selected filter
+better to update via object id, IDs are unique to each document
+db.students.updateOne({name:'Rushil'}, {$set:{fulltime:trure}})
+db.students.find(_id:ObjectId(the id in the db))
+
+updatemany method
+updates many documents at once
+db.students.updateMany(filter, update)
+db.students.updateMany({}, {$set:{modify a field}})
+keeping filter empty will update every item in the document
+students.updateMany({fulltime:{$exists:false}}, {$set:(modify)})
+
+delete documents 
+deleteONe and deleteMany
+db.students.deleteOne(filter, )
+similar to update one and update many
+db.students.deleteMany({some filter, maybe the value of a key})
+can delete complete fields using deleteMany
+deleteMany({registrationDate:{$exists:false}})
+exists and set operators are used for this update and delete
+
+operators
+denoted with $ sign
+$ comparison operators
+$ne:{name}
+every value that is not equal to the name passed inside {}
+
+less than and less than equals to
+students.find({age:{$lt:20}})
+returns any results with age less than 20
+lte is less than equal whihc includes 20 as well
+lot of operators like this, look em up I guess
+
+this covers crud for mongodb
+we connect mongo with express that about it
+
+in operator to find everything in the array 
+.find({name:{$in:["any name u wanna find, name 1, name 2"]}})
+nin is not in, opposite of in, return documents that arent mentioned in the array
+
+these are all comparison operators
