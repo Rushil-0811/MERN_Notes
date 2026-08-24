@@ -111,3 +111,28 @@ in operator to find everything in the array
 nin is not in, opposite of in, return documents that arent mentioned in the array
 
 these are all comparison operators
+
+logical operators
+and, not, nor , or
+and - check if 2 expressions are true
+operators preceede with a $, : after the operator is called, []
+db.students.find({$and: [{fulltime:true}, {age:{$lte:22}}]})
+or - any of the condition is true 
+nor - both need to be false
+not - reverses what is being looked for
+
+indexes 
+quick lookup of a field, but it takes up more memory
+data stored as a b-tree
+.find is a linear search
+lookup speed can be improved using indexes
+db.students.createIndex({name: 1})
+name
+db.students.getIndex
+db.students.dropIndex
+
+collections
+collection is group of documents
+database is group of collections
+
+look up interview questions as well later on
