@@ -19,3 +19,13 @@ Link: https://github.com/Devinterview-io/express-interview-questions
 7. JS - https://github.com/sudheerj/javascript-interview-questions
 
 8. JS - https://github.com/Devinterview-io/javascript-interview-questions
+
+ML Related 
+https://mlu-explain.github.io/neural-networks/
+
+For learning and all
+https://github.com/Asabeneh/30-Days-Of-Python/tree/master
+
+build your own X
+
+https://github.com/microsoft/ML-For-Beginners
