@@ -33,3 +33,5 @@ https://github.com/microsoft/ML-For-Beginners
 AWS - https://github.com/ChathurangaVKD/AWS-Certified-Solutions-Architect-Associate-SAA-C03
 
 I have starrred some repos as well, check em out too
+
+For system design - https://github.com/donnemartin/system-design-primer
