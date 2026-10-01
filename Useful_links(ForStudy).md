@@ -35,3 +35,5 @@ AWS - https://github.com/ChathurangaVKD/AWS-Certified-Solutions-Architect-Associ
 I have starrred some repos as well, check em out too
 
 For system design - https://github.com/donnemartin/system-design-primer
+
+system design blog - https://algomaster.io/learn/system-design/course-introduction
