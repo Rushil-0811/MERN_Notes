@@ -75,3 +75,17 @@ this uses identity protocols
 saml idp and oidc idp
 xml based protocol
  
+
+some more pointers:
+1. For JWT (access + refresh token) strategy you should never store the access token in cookie or storage (localstorage, session storage, etc.). Doing so allows JS to be able to access it, so in case a third-party JS is injected, they'll have access to it. Thus, you always keep the access token in memory, meaning the app memory, like a state in your react app.
+
+2. Usually you also keep copy of the refresh token in your DB so that you can maintain the user's session. When the refresh token passed you (may) compare it. And like that by storing multiple refresh tokens from the same user (via different browsers/devices) you can provide multiple sessions for the same user. This allows you to give the security option 'log out from all devices'. If the user selects that, then you delete the refresh token values stored in the server and also using the response wipe out the tokens from the client. Now after this if the user visits the url (website/web app) from any other device where session was previously ongoing, now since the refresh token provided by the client doesn't match with the one in the server (since server ain't got any), the client gets 401 response and gets kicked out, being redirected to login and their cookies getting deleted.
+
+3. In case you're supporting for older browsers you also need CSRF token (not 100% sure about this). You pass the CSRF token both in normal cookie and header ("Double Submit Cookie" pattern), and then check whether their values are the same in the server. If they're not, then there was a CSRF attack and you give a bad response (maybe 401 or 400, not sure).
+
+1. The strategy mentioned in Point 1 (memory + header) provides the highest security but it's more difficult to implement. So instead many (like Next.js) instead pass/set both tokens as httpOnly on the client, and also provide a CSRF token. However they don't use the "double submit cookie" pattern, but rather some other new pattern called as "synchronizer" pattern. In this pattern for the CSRF token the server generates a random string (token), and both stores it in itself (DB) as well as passing it to the user. Then the user passes this CSRF token when making a request (access and refresh tokens are now httpOnly so they get passed on by default) as header. The server gets the CSRF token and it compares it with the one in the server, and if they match then it's okay. Note that since the CSRF token is manually injected via JS, an attacker attempting to perform a CSRF attack wouldn't be able to add the header since they don't have access to your JS, and due to SOP (Same-Origin-Policy), unless you've allowed the attacker's domain using CORS.
+
+The difference between the "double submit cookie" pattern and the "synchronizer" pattern is that the former is stateless and doesn't need DB storage, while the latter needs the server to remember.
+
+2. Building on point 1, the difference between the "memory + header" approach and the "both tokens in httpOnly cookie" approach is that in the former while there's more security, the client logic is messy and you might see a flash of login screen if not handled properly.
+
